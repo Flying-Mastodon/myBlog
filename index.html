@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Blog</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supabase Blog</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>My Blog</h1>
+    <h1>My Supabase Blog</h1>
   </header>
 
   <main>
     <section id="new-post">
       <h2>Create New Post</h2>
       <form id="post-form">
-        <input type="text" id="post-title" placeholder="Post Title" required />
+        <input type="text" id="post-title" placeholder="Post Title" required>
         <textarea id="post-content" placeholder="Write your content here..." required></textarea>
         <button type="submit">Post</button>
       </form>
@@ -27,6 +27,8 @@
     </section>
   </main>
 
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="script.js"></script>
 </body>
 </html>

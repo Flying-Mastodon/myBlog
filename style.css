@@ -1,64 +1,44 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: sans-serif;
+  background: #f9f9f9;
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
 }
 
 header {
   background: #333;
-  color: #fff;
+  color: white;
   padding: 1rem;
   text-align: center;
 }
 
 main {
-  padding: 1rem;
-  max-width: 800px;
+  max-width: 700px;
   margin: auto;
+  padding: 2rem;
 }
 
-#new-post {
-  background: #fff;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-#new-post input, #new-post textarea {
+form input, form textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.8rem;
   margin-bottom: 1rem;
+  border-radius: 4px;
   border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-#new-post button {
+form button {
+  padding: 0.7rem 1.2rem;
   background: #333;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-#new-post button:hover {
-  background: #555;
-}
-
-#blog-feed .post {
-  background: #fff;
+.post {
+  background: white;
   padding: 1rem;
   margin-bottom: 1.5rem;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-#blog-feed .post h3 {
-  margin-top: 0;
-}
-
-#blog-feed .post p {
-  white-space: pre-line;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
