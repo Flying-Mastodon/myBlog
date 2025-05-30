@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Blog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>My Blog</h1>
+  </header>
+
+  <main>
+    <section id="new-post">
+      <h2>Create New Post</h2>
+      <form id="post-form">
+        <input type="text" id="post-title" placeholder="Post Title" required />
+        <textarea id="post-content" placeholder="Write your content here..." required></textarea>
+        <button type="submit">Post</button>
+      </form>
+    </section>
+
+    <section id="blog-feed">
+      <h2>Recent Posts</h2>
+      <div id="posts-container"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
