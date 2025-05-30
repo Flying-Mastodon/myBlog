@@ -4,37 +4,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const postContent = document.getElementById("post-content");
   const postsContainer = document.getElementById("posts-container");
 
-  // Load posts from the server
   const loadPosts = async () => {
-    postsContainer.innerHTML = "";
-    const res = await fetch("/api/posts");
+    const res = await fetch("get_posts.php");
     const posts = await res.json();
+    postsContainer.innerHTML = "";
     posts.reverse().forEach(post => {
-      const postElement = document.createElement("div");
-      postElement.classList.add("post");
-      postElement.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
-      postsContainer.appendChild(postElement);
+      const el = document.createElement("div");
+      el.classList.add("post");
+      el.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+      postsContainer.appendChild(el);
     });
   };
 
-  // Submit new post
   postForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const newPost = {
       title: postTitle.value.trim(),
       content: postContent.value.trim()
     };
-    if (newPost.title && newPost.content) {
-      await fetch("/api/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPost)
-      });
-      postTitle.value = "";
-      postContent.value = "";
-      loadPosts();
-    }
+    await fetch("save_post.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost)
+    });
+    postTitle.value = "";
+    postContent.value = "";
+    loadPosts();
   });
 
-  loadPosts(); // Initial load
+  loadPosts();
 });
