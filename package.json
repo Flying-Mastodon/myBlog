@@ -1,0 +1,18 @@
+
+{
+  "name": "supabase-blog-server",
+  "version": "1.0.0",
+  "description": "A simple blog backend using Supabase",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Dean Booker",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "@supabase/supabase-js": "^2.39.5",
+    "cors": "^2.8.5"
+  }
+}
