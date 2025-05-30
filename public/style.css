@@ -1,0 +1,127 @@
+/* CSS Variables for Theming */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --header-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --body-font: 'Open Sans', sans-serif;
+  --max-width: 800px;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-family: var(--header-font);
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2rem;
+}
+
+/* Main Content */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* New Post Section */
+#new-post {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+#new-post h2 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+#post-form input[type="text"],
+#post-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--body-font);
+  font-size: 1rem;
+}
+
+#post-form button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#post-form button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Blog Feed Section */
+#blog-feed h2 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.post {
+  background-color: #fff;
+  padding: 20px;
+  border-left: 5px solid var(--primary-color);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.post h3 {
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.post p {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  #post-form button {
+    width: 100%;
+  }
+}
