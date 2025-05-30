@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://YOUR-RENDER-APP-URL.onrender.com'; 
+const API_BASE_URL = 'https://myblog-sy0j.onrender.com'; 
 // Replace the above with your deployed backend URL
 
 document.addEventListener('DOMContentLoaded', () => {
