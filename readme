@@ -1,0 +1,4 @@
+Webhost - https://myblog-sy0j.onrender.com/index.html
+
+Database - https://supabase.com/dashboard/project/zcwrudkrhtczcumhbvwh/auth/policies?search=17269&schema=public
+Note: Database currently has global read and write as 'RLS' is disabled 

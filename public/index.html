@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Supabase Blog (with Node backend)</title>
+  <title>Hams Blog</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>My Blog (via Node Backend)</h1>
+    <h1>Hams wonderfull blog</h1>
   </header>
 
   <main>
+
+    <section id="blog-feed">
+      <h2>Recent Posts</h2>
+      <div id="posts-container"></div>
+    </section>
+    
     <section id="new-post">
       <h2>Create New Post</h2>
       <form id="post-form">
@@ -21,11 +27,10 @@
       </form>
     </section>
 
-    <section id="blog-feed">
-      <h2>Recent Posts</h2>
-      <div id="posts-container"></div>
-    </section>
+    
   </main>
+
+  
 
   <script src="script.js"></script>
 </body>
