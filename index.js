@@ -38,3 +38,9 @@ app.post('/posts', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.use(express.static('public'));
