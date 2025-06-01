@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     const title = postTitle.value.trim();
-    const content = postContent.value.trim();
+    const content = postContent.getContent();
     if (!title || !content) return;
 
     try {
