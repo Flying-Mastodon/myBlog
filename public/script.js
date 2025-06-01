@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const postContent = tinymce.get('post-content');
   const postsContainer = document.getElementById('posts-container');
 
-  // Load posts from your backend
+  // Load posts from backend
   async function loadPosts() {
     try {
       const res = await fetch(`${API_BASE_URL}/posts`);
@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       postsContainer.innerHTML = '';
       posts.forEach(post => {
+        const formattedDate = formatUKDate(post.created_at);
         const el = document.createElement('div');
         el.className = 'post';
-        el.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+        el.innerHTML = `${formattedDate}<h3>${post.title}</h3><p>${post.content}</p>`;
         postsContainer.appendChild(el);
       });
     } catch (error) {
@@ -26,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(error);
     }
   }
+
+
 
   // Submit new post to backend
   postForm.addEventListener('submit', async e => {
@@ -53,5 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  
+
   loadPosts();
 });
+
+
+function formatUKDate(isoString) {
+  const date = new Date(isoString);
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
