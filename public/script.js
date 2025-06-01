@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     const title = postTitle.value.trim();
-    const content = postContent.getContent();
+    const content = tinyMCE.activeEditor.getContent();
     if (!title || !content) return;
 
     try {
