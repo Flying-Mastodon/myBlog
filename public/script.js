@@ -4,7 +4,7 @@ const API_BASE_URL = 'https://myblog-sy0j.onrender.com';
 document.addEventListener('DOMContentLoaded', () => {
   const postForm = document.getElementById('post-form');
   const postTitle = document.getElementById('post-title');
-  const postContent = document.getElementById('post-content');
+  const postContent = tinymce.get('post-content');
   const postsContainer = document.getElementById('posts-container');
 
   // Load posts from your backend
