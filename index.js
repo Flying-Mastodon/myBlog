@@ -29,7 +29,7 @@ app.post('/posts', async (req, res) => {
   const { title, content } = req.body;
   const { error } = await supabase
     .from('posts')
-    .insert([{ title, content }]);
+    .insert([{ created_at, title, content }]);
 
   if (error) return res.status(500).json({ error: error.message });
   res.status(201).json({ message: 'Post created!' });
