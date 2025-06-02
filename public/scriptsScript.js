@@ -9,11 +9,12 @@ const closeModal = document.getElementById('close-modal');
 
 categorySelect.addEventListener('change', async () => {
   const category = categorySelect.value;
+  const query = '/scripts?category=' + categorySelect.value;
   scriptsList.innerHTML = '';
   if (!category) return;
 
   try {
-    const res = await fetch(`/scripts?category=${encodeURIComponent(category)}`);
+    const res = await fetch(query);
     const data = await res.json();
 
     if (!res.ok) {
