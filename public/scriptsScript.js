@@ -73,7 +73,7 @@ function formatUKDate(isoString) {
 
     const title = postTitle.value.trim();
     const description = postDescription.value.trim();
-    const script = postContent.value.trim();
+    const script = postScript.value.trim();
     const category =postCategory.value.trim()
      
     if (!title || !description || !title || !category) return;
@@ -86,6 +86,13 @@ function formatUKDate(isoString) {
       });
 
       if (!res.ok) throw new Error('Failed to post');
+      if (res.ok) {
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-category').value = '';
+        document.getElementById('post-description').value = '';
+        document.getElementById('post-content').value = '';
+        alert('Script submitted successfully!');
+      }
      
     } catch (error) {
       alert('Error submitting post.');
