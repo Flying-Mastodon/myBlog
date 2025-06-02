@@ -303,7 +303,7 @@ main {
 }
 
 .script-item {
-  background-color: #1e1e2f;
+  background-color: #757575;
   color: #fff;
   border-radius: 6px;
   padding: 1rem;
@@ -316,13 +316,13 @@ main {
 }
 
 .script-item small {
-  color: #aaa;
+  color: #ffffff;
 }
 
 .script-item button {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: #00ffe7;
+  background-color: #67aae9;
   color: #0f1117;
   border: none;
   border-radius: 4px;

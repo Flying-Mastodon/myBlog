@@ -1,3 +1,4 @@
+const API_BASE_URL = 'https://myblog-sy0j.onrender.com'; 
 const categorySelect = document.getElementById('category-select');
 const scriptsList = document.getElementById('scripts-list');
 
@@ -9,7 +10,7 @@ const closeModal = document.getElementById('close-modal');
 
 categorySelect.addEventListener('change', async () => {
   const category = categorySelect.value;
-  const query = '/scripts?category=' + categorySelect.value;
+  const query = API_BASE_URL + '/scripts?category=' + categorySelect.value;
   scriptsList.innerHTML = '';
   if (!category) return;
 
