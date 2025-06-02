@@ -35,7 +35,7 @@ app.post('/posts', async (req, res) => {
   res.status(201).json({ message: 'Post created!' });
 });
 
-// API route to get scripts by category
+// Endpoint to get scripts by category
 app.get('/scripts', async (req, res) => {
   const { category } = req.query;
 
@@ -49,6 +49,17 @@ app.get('/scripts', async (req, res) => {
 
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
+});
+
+// Endpoint to add a script
+app.post('/scripts', async (req, res) => {
+  const { title, description, script, category} = req.body;
+  const { error } = await supabase
+    .from('scripts')
+    .insert([{ title, description, script, category}]);
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(201).json({ message: 'Article created!' });
 });
 
 app.listen(PORT, () => {

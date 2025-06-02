@@ -34,6 +34,27 @@
         <pre id="modal-script"></pre>
       </div>
     </div>
+
+     <section id="new-post">
+      <h2>Create New Sccript</h2>
+                <select id="post-category">
+      <option value="">-- Select a category --</option>
+      <option value="fix scripts">Fix scripts</option>
+      <option value="script includes">Script includes</option>
+      <option value="mailscripts">Mailscripts</option>
+      <option value="business rules">Business rules</option>
+      <option value="flow scripts">Flow scripts</option>
+      <option value="ui page">UI page</option>
+      <option value="other">Other</option>
+    </select>
+      <form id="post-form">
+        <input type="text" id="post-title" placeholder="Script Title" name="title" required />
+        <textarea id="post-description" name="content" placeholder="Script Purpose"></textarea>
+      <textarea id="post-content" name="content" placeholder="Script Body"></textarea>
+        <button type="submit">Post</button>
+      </form>
+    </section>
+
   </main>
 
   <script src="header-loader.js"></script>

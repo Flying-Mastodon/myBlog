@@ -7,6 +7,11 @@ const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 const modalScript = document.getElementById('modal-script');
 const closeModal = document.getElementById('close-modal');
+const postForm = document.getElementById('post-form');
+const postTitle = document.getElementById('post-title');
+const postCategory = document.getElementById('post-category');
+const postDescription = document.getElementById('post-description');
+const postScript = document.getElementById('post-content');
 
 categorySelect.addEventListener('change', async () => {
   const category = categorySelect.value;
@@ -61,3 +66,29 @@ function formatUKDate(isoString) {
   const date = new Date(isoString);
   return date.toLocaleDateString('en-GB');
 }
+
+  // Submit new post to backend
+  postForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const title = postTitle.value.trim();
+    const description = postDescription.value.trim();
+    const script = postContent.value.trim();
+    const category =postCategory.value.trim()
+     
+    if (!title || !description || !title || !category) return;
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/scripts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description, script, category}),
+      });
+
+      if (!res.ok) throw new Error('Failed to post');
+     
+    } catch (error) {
+      alert('Error submitting post.');
+      console.error(error);
+    }
+  });
