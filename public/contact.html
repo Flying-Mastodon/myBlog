@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Me – Ham's Blog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="contact-page">
+    <section class="contact-intro">
+      <h2>Let's Connect</h2>
+      <p>I'm an outgoing & active individual; leading teams by creating a trusting and energetic environment. Feel free to reach out through the form below or connect with me on LinkedIn.</p>
+    </section>
+
+    <section class="contact-details">
+      <h3>Contact Information</h3>
+      <ul>
+        <li>Email: <a href="mailto:deanpbooker@gmail.com">deanpbooker@gmail.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/dean-booker-54510a104/" target="_blank">Dean Booker</a></li>
+        <li>Location: Greater Colchester Area</li>
+      </ul>
+    </section>
+
+    <section class="contact-form">
+      <h3>Send a Message</h3>
+      <form id="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="header-loader.js"></script>
+  <script>
+    // Basic form submission handling
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! I will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

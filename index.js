@@ -35,6 +35,22 @@ app.post('/posts', async (req, res) => {
   res.status(201).json({ message: 'Post created!' });
 });
 
+// API route to get scripts by category
+app.get('/scripts', async (req, res) => {
+  const { category } = req.query;
+
+  if (!category) return res.status(400).json({ error: 'Category required' });
+
+  const { data, error } = await supabase
+    .from('scripts')
+    .select('id, title, description, script, created_at')
+    .eq('category', category)
+    .order('created_at', { ascending: false });
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

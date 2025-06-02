@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script Directory</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="script-directory">
+    <h2>Script Directory</h2>
+
+    <label for="category-select">Choose a category:</label>
+    <select id="category-select">
+      <option value="">-- Select a category --</option>
+      <option value="Fix scripts">Fix scripts</option>
+      <option value="Script includes">Script includes</option>
+      <option value="Mailscripts">Mailscripts</option>
+      <option value="Business rules">Business rules</option>
+      <option value="Flow scripts">Flow scripts</option>
+      <option value="UI page">UI page</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <div id="scripts-list" class="script-list"></div>
+
+    <div id="script-modal" class="modal hidden">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h3 id="modal-title"></h3>
+        <p id="modal-description"></p>
+        <pre id="modal-script"></pre>
+      </div>
+    </div>
+  </main>
+
+  <script src="header-loader.js"></script>
+  <script type="module" src="scriptsScript.js"></script>
+</body>
+</html>
