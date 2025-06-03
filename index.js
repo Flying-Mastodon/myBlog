@@ -8,10 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-// fallback for unmatched routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+
 
 // Read from environment variables (set in Render Dashboard)
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -104,5 +101,8 @@ app.post('/api/scan', async (req, res) => {
 
 
 
-
+// fallback for unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
