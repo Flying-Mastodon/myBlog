@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fetch = require('node-fetch'); // or use native fetch in Node >=18
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
@@ -7,6 +8,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
+// fallback for unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Read from environment variables (set in Render Dashboard)
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -66,10 +72,38 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+app.post('/api/scan', async (req, res) => {
+  const { instanceNames, path } = req.body;
+  const instances = instanceNames.split(',').map(i => i.trim()).filter(Boolean);
+  const results = [];
 
-app.use(express.static('public'));
+  for (const name of instances) {
+    const url = `https://${name}.service-now.com/${path}`;
 
-// Optional: fallback for unmatched routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        redirect: 'follow'
+      });
+
+      const finalUrl = response.url;
+      if (finalUrl !== url) {
+        results.push(`🔁 ${url} redirected to ${finalUrl}`);
+      } else {
+        results.push(`✅ ${url} is accessible with no redirect`);
+      }
+    } catch (err) {
+      results.push(`⚠️ ${url} failed: ${err.message}`);
+    }
+  }
+
+  res.json({ output: results.join('\n') });
 });
+
+
+
+
+
+
+
+

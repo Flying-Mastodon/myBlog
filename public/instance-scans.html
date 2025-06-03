@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instance Scans</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #results { white-space: pre-wrap; margin-top: 20px; background: #f0f0f0; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+ <div id="header-placeholder"></div>
+<body>
+  <h1>ServiceNow Instance Scanner</h1>
+  <form id="scanForm">
+    <label>Instance Names (comma separated):<br/>
+    <textarea  rows="10" cols="50" id="instances" placeholder="e.g. acme, beta, charlie" required></textarea> </textarea>
+    </label><br/>
+    <label>Portal Path:<br/>
+      <select id="path">
+        <option value="csp">/csp</option>123
+        <option value="csm">/csm</option>
+        <option value="sp">/sp</option>
+        <option value="esc">/esc</option>
+        <option value="login.do">/login.do</option>        
+      </select>
+    </label><br/>
+    <button type="submit">Scan</button>
+  </form>
+
+  <div id="results"></div>
+
+  <script>
+    const form = document.getElementById('scanForm');
+    const results = document.getElementById('results');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      results.textContent = 'Scanning...';
+
+      const instanceNames = document.getElementById('instances').value;
+      const path = document.getElementById('path').value;
+
+      const res = await fetch('/api/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instanceNames, path })
+      });
+
+      const data = await res.json();
+      results.textContent = data.output;
+    });
+  </script>
+   <script src="header-loader.js"></script>
+</body>
+</html>
