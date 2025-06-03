@@ -5,7 +5,7 @@ const postsContainer = document.getElementById('posts-container');
 
 async function loadPosts() {
     try {
-      const res = await fetch(`${API_BASE_URL}/posts`);
+      const res = await fetch(`${API_BASE_URL}/api/posts`);
       if (!res.ok) throw new Error('Failed to fetch posts');
       const posts = await res.json();
 

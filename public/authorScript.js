@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load posts from backend
   async function loadPosts() {
     try {
-      const res = await fetch(`${API_BASE_URL}/posts`);
+      const res = await fetch(`${API_BASE_URL}/api/posts`);
       if (!res.ok) throw new Error('Failed to fetch posts');
       const posts = await res.json();
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!title || !content) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/posts`, {
+      const res = await fetch(`${API_BASE_URL}/api/posts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, content }),

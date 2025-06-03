@@ -1,12 +1,72 @@
 <!-- header.html -->
 <header class="site-header">
   <nav class="nav-container">
-    <h1 class="logo"><a href="/">YTREWQ </a></h1>
+    <h1 class="logo"><a href="/">YTREWQ</a></h1>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="scripts.html">Scripts</a></li>
+      <li class="dropdown">
+        <a href="#">ServiceNow Utilities ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="scripts.html">Scripts</a></li>
+          <li><a href="instance-scan.html">Instance Scans</a></li>
+        </ul>
+      </li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 </header>
+
+<style>
+/* Basic dropdown styles */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+  color: inherit;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgb(46, 172, 255);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.dropdown-menu li a {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Optional: Visual cue for dropdown arrow */
+.dropdown > a::after {
+  content: '';
+  margin-left: 0.4rem;
+}
+</style>

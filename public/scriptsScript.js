@@ -15,7 +15,7 @@ const postScript = document.getElementById('post-content');
 
 categorySelect.addEventListener('change', async () => {
   const category = categorySelect.value;
-  const query = API_BASE_URL + '/scripts?category=' + categorySelect.value;
+  const query = API_BASE_URL + '/api/scripts?category=' + categorySelect.value;
   scriptsList.innerHTML = '';
   if (!category) return;
 
@@ -79,7 +79,7 @@ function formatUKDate(isoString) {
     if (!title || !description || !title || !category) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/scripts`, {
+      const res = await fetch(`${API_BASE_URL}/api/scripts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, description, script, category}),

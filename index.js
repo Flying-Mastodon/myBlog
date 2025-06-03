@@ -19,7 +19,7 @@ const SUPABASE_KEY = process.env.SUPABASE_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Endpoint to fetch blog posts
-app.get('/posts', async (req, res) => {
+app.get('/api/posts', async (req, res) => {
   const { data, error } = await supabase
     .from('posts')
     .select('*')
@@ -30,7 +30,7 @@ app.get('/posts', async (req, res) => {
 });
 
 // Endpoint to add a blog post
-app.post('/posts', async (req, res) => {
+app.post('/api/posts', async (req, res) => {
   const { title, content } = req.body;
   const { error } = await supabase
     .from('posts')
@@ -41,7 +41,7 @@ app.post('/posts', async (req, res) => {
 });
 
 // Endpoint to get scripts by category
-app.get('/scripts', async (req, res) => {
+app.get('/api/scripts', async (req, res) => {
   const { category } = req.query;
 
   if (!category) return res.status(400).json({ error: 'Category required' });
@@ -57,7 +57,7 @@ app.get('/scripts', async (req, res) => {
 });
 
 // Endpoint to add a script
-app.post('/scripts', async (req, res) => {
+app.post('/api/scripts', async (req, res) => {
   const { title, description, script, category} = req.body;
   const { error } = await supabase
     .from('scripts')
@@ -86,7 +86,6 @@ app.post('/api/scan', async (req, res) => {
       });
 
       const finalUrl = response.url;
-
       if (finalUrl !== url) {
         results.push(`🔁 ${url} redirected to ${finalUrl}`);
       } else {
