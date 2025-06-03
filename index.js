@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch'); // or use native fetch in Node >=18
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
@@ -87,6 +86,7 @@ app.post('/api/scan', async (req, res) => {
       });
 
       const finalUrl = response.url;
+
       if (finalUrl !== url) {
         results.push(`🔁 ${url} redirected to ${finalUrl}`);
       } else {
