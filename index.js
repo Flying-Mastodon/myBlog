@@ -120,7 +120,7 @@ app.post('/log-visitor', async (req, res) => {
   }
 });
 
-export default app;
+module.exports = app;
 //End
 
 
