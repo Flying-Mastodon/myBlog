@@ -50,7 +50,7 @@ app.get('/api/analytics', async (req, res) => {
 
 // Endpoint to post analytics 
 app.post('/api/analytics', async (req, res) => {
-  const { title, content } = req.body;
+  const { ip_address, os } = req.body;
   const { error } = await supabase
     .from('analytics')
     .insert([{ ip_address, os }]);
