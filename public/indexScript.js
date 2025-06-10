@@ -1,8 +1,7 @@
 const API_BASE_URL = 'https://myblog-sy0j.onrender.com'; 
 
-
+//Post Management
 const postsContainer = document.getElementById('posts-container');
-
 async function loadPosts() {
     try {
       const res = await fetch(`${API_BASE_URL}/api/posts`);
@@ -26,7 +25,7 @@ async function loadPosts() {
 loadPosts();
 
 
-
+//Format date to UK standard
 function formatUKDate(isoString) {
   const date = new Date(isoString);
   return date.toLocaleDateString('en-GB', {
@@ -36,3 +35,20 @@ function formatUKDate(isoString) {
   });
 }
 
+//Visitor Logging
+async function logVisitorAnalytics() {
+  const os = navigator.userAgent;
+
+  try {
+    await fetch('/api/log-visitor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ os })
+    });
+  } catch (err) {
+    console.error('Failed to log visitor:', err);
+  }
+}
+
+// Call this on page load
+window.addEventListener('DOMContentLoaded', logVisitorAnalytics);

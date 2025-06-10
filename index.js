@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
+const dotenv = require ('dotenv');
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -96,8 +98,30 @@ app.post('/api/scan', async (req, res) => {
   res.json({ output: results.join('\n') });
 });
 
+//New Analytics capability 
+app.post('/log-visitor', async (req, res) => {
+  const os = req.body.os;
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
+  try {
+    const { error } = await supabase
+      .from('analytics')
+      .insert([{ ip_address: ip, os }]);
 
+    if (error) {
+      console.error('Supabase insert error:', error.message);
+      return res.status(500).json({ error: 'Insert failed' });
+    }
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error('Server error:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+export default app;
+//End
 
 
 
