@@ -37,6 +37,17 @@ app.post('/api/posts', async (req, res) => {
   res.status(201).json({ message: 'Post created!' });
 });
 
+// Endpoint to get analytics
+app.get('/api/analytics', async (req, res) => {
+  const { data, error } = await supabase
+    .from('analytics')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
+});
+
 // Endpoint to post analytics 
 app.post('/api/analytics', async (req, res) => {
   const { title, content } = req.body;
