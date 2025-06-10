@@ -34,21 +34,3 @@ function formatUKDate(isoString) {
     year: 'numeric'
   });
 }
-
-//Visitor Logging
-async function logVisitorAnalytics() {
-  const os = navigator.userAgent;
-
-  try {
-    await fetch('/api/log-visitor', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ os })
-    });
-  } catch (err) {
-    console.error('Failed to log visitor:', err);
-  }
-}
-
-// Call this on page load
-window.addEventListener('DOMContentLoaded', logVisitorAnalytics);
