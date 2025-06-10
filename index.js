@@ -38,7 +38,7 @@ app.post('/api/posts', async (req, res) => {
 });
 
 // Endpoint to post analytics 
-app.get('/api/analytics', async (req, res) => {
+app.post('/api/analytics', async (req, res) => {
   const { title, content } = req.body;
   const { error } = await supabase
     .from('analytics')
