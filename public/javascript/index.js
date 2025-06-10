@@ -40,7 +40,7 @@ async function postAnalytics() {
   const ip = "test";
   const os = "linux";
     try {
-           const res = await fetch(`${API_BASE_URL}/api/posts`, {
+           const res = await fetch(`${API_BASE_URL}/api/analytics`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ip, os }),
@@ -55,3 +55,4 @@ async function postAnalytics() {
       console.error(error);
     }
   }
+  postAnalytics();
