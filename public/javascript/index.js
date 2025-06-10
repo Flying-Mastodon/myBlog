@@ -34,3 +34,24 @@ function formatUKDate(isoString) {
     year: 'numeric'
   });
 }
+
+//Capture Analytics
+async function postAnalytics() {
+  const ip = "test";
+  const os = "linux";
+    try {
+           const res = await fetch(`${API_BASE_URL}/api/posts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ip, os }),
+      });
+
+      if (!res.ok) throw new Error('Failed to post');
+
+    
+    
+    } catch (error) {
+      postsContainer.textContent = 'Error submitting record.';
+      console.error(error);
+    }
+  }

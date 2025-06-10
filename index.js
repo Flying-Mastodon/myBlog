@@ -37,6 +37,17 @@ app.post('/api/posts', async (req, res) => {
   res.status(201).json({ message: 'Post created!' });
 });
 
+// Endpoint to post analytics 
+app.get('/api/analytics', async (req, res) => {
+  const { title, content } = req.body;
+  const { error } = await supabase
+    .from('analytics')
+    .insert([{ ip_address, os }]);
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(201).json({ message: 'Record created!' });
+});
+
 // Endpoint to get scripts by category
 app.get('/api/scripts', async (req, res) => {
   const { category } = req.query;
@@ -52,6 +63,7 @@ app.get('/api/scripts', async (req, res) => {
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
 });
+
 
 // Endpoint to add a script
 app.post('/api/scripts', async (req, res) => {
