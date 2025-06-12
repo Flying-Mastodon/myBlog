@@ -1,8 +1,6 @@
 const API_BASE_URL = 'https://myblog-sy0j.onrender.com'; 
 
-let get_ip_address = getIP();
-let get_country = "";
-let get_isp ="";
+
 
 //Post Management
 const postsContainer = document.getElementById('posts-container');
@@ -42,7 +40,10 @@ function formatUKDate(isoString) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+//Initialise IP data
+let get_ip_address = getIP();
+let get_country = "";
+let get_isp ="";
 //Capture Analytics
 async function postAnalytics() {  
   await sleep(3000);
