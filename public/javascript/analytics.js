@@ -41,7 +41,18 @@ async function loadAnalytics() {
 }
 
 function renderChart(canvasId, label, data) {
-  const ctx = document.getElementById(canvasId).getContext('2d');
+  const canvas = document.getElementById(canvasId);
+  
+  // Wrap canvas in a div if not already wrapped
+  if (!canvas.parentElement.classList.contains('chart-wrapper')) {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('chart-wrapper');
+    canvas.parentNode.insertBefore(wrapper, canvas);
+    wrapper.appendChild(canvas);
+  }
+
+  const ctx = canvas.getContext('2d');
+
   new Chart(ctx, {
     type: 'pie',
     data: {
@@ -58,7 +69,11 @@ function renderChart(canvasId, label, data) {
     },
     options: {
       responsive: true,
-      plugins: { legend: { position: 'bottom' } }
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
     }
   });
 }

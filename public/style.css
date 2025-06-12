@@ -471,3 +471,14 @@ main {
   border: none;
   cursor: pointer;
 }
+
+.chart-wrapper {
+  max-width: 300px; 
+  margin: 0 auto
+  padding: 1rem;
+  }
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: auto !important;
+  }
