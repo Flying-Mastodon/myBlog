@@ -1,6 +1,6 @@
 fetch('header.html')
   .then(res => res.text())
-  .then(html => {
+  .then(async html => {
     document.getElementById('header-placeholder').innerHTML = html;
 
     // Highlight active link based on current URL
@@ -12,6 +12,26 @@ fetch('header.html')
         link.classList.add('active');
       }
     });
+
+    // Check if user is authenticated and update header
+    try {
+      const userRes = await fetch('https://myblog-sy0j.onrender.com/api/user', { credentials: 'include' });
+      const nav = document.querySelector('.nav-links');
+
+      const link = document.createElement('a');
+      if (userRes.ok) {
+        const user = await userRes.json();
+        link.href = 'profile.html';
+        link.textContent = 'Profile';
+      } else {
+        link.href = 'login.html';
+        link.textContent = 'Login';
+      }
+      link.classList.add('nav-item');
+      nav.appendChild(link);
+    } catch (err) {
+      console.error('Error checking user auth:', err);
+    }
   })
   .catch(err => {
     console.error('Error loading header:', err);
