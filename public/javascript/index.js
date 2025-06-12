@@ -16,13 +16,13 @@ async function loadPosts() {
     posts.forEach(post => {
       const formattedDate = formatUKDate(post.created_at);
       const el = document.createElement('div');
-      el.className = 'post';
+     
+      let likes = post.likes;
+      if (likes == null)
+          {likes = 0; }
 
-      // Initialize like count if not already present
-      if (!likeCounts[post.id]) {
-        likeCounts[post.id] = 0;
-      }
-
+   
+      el.className = 'post'; 
       el.innerHTML = `
         <div class="post-header">
           <small>${formattedDate}</small>
@@ -31,7 +31,7 @@ async function loadPosts() {
         <p>${post.content}</p>
         <div class="post-footer">
           <button class="like-btn" data-id="${post.id}">👍 Like</button>
-          <span class="like-count" id="like-${post.id}">${likeCounts[post.id]} likes</span>
+          <span class="like-count" id="like-${post.id}">${likes} likes</span>
         </div>
       `;
 
