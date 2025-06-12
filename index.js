@@ -188,8 +188,8 @@ app.post('/api/scripts', async (req, res) => {
   res.status(201).json({ message: 'Article created!' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
 
 app.post('/api/scan', async (req, res) => {
