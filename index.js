@@ -67,9 +67,6 @@ app.get('/api/me', authMiddleware, (req, res) => {
   res.json({ user: req.user });
 });
 
-const express = require('express');
-const authenticateUser = require('./middleware/auth');
-
 app.get('/api/user', authenticateUser, (req, res) => {
   res.json(req.user); // This is set by middleware if token is valid
 });
