@@ -37,6 +37,54 @@ app.post('/api/posts', async (req, res) => {
   res.status(201).json({ message: 'Post created!' });
 });
 
+// Endpoint to increment likes for a post
+app.post('/api/posts/:id/like', async (req, res) => {
+  const { id } = req.params;
+
+  // Get current likes
+  const { data: post, error: fetchError } = await supabase
+    .from('posts')
+    .select('likes')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) return res.status(500).json({ error: fetchError.message });
+
+  const newLikes = (post.likes || 0) + 1;
+
+  // Update likes in the database
+  const { error: updateError } = await supabase
+    .from('posts')
+    .update({ likes: newLikes })
+    .eq('id', id);
+
+  if (updateError) return res.status(500).json({ error: updateError.message });
+
+  res.status(200).json({ likes: newLikes });
+});
+
+// Endpoint to fetch blog posts interactions WIP not in use
+app.get('/api/posts_interactions', async (req, res) => {
+  const { data, error } = await supabase
+    .from('posts_interactions')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
+});
+
+// Endpoint to fetch blog posts interactions WIP not in use
+app.post('/api/posts_interactions', async (req, res) => {
+  const { parent, likes, comment } = req.body;
+  const { error } = await supabase
+    .from('posts_interactions')
+    .insert([{ parent, likes, comment }]);
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.status(201).json({ message: 'Post created!' });
+});
+
 // Endpoint to get analytics
 app.get('/api/analytics', async (req, res) => {
   const { data, error } = await supabase

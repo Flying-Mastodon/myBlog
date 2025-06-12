@@ -482,3 +482,24 @@ main {
   width: 100% !important;
   height: auto !important;
   }
+
+  .post-footer {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.like-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.like-btn:hover {
+  background-color: #2563eb;
+}

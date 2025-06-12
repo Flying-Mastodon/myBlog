@@ -4,25 +4,70 @@ const API_BASE_URL = 'https://myblog-sy0j.onrender.com';
 
 //Post Management
 const postsContainer = document.getElementById('posts-container');
-async function loadPosts() {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/posts`);
-      if (!res.ok) throw new Error('Failed to fetch posts');
-      const posts = await res.json();
+const likeCounts = {}; // Temporary like storage
 
-      postsContainer.innerHTML = '';
-      posts.forEach(post => {
-        const formattedDate = formatUKDate(post.created_at);
-        const el = document.createElement('div');
-        el.className = 'post';
-        el.innerHTML = `${formattedDate}<h3>${post.title}</h3><p>${post.content}</p>`;
-        postsContainer.appendChild(el);
-      });
-    } catch (error) {
-      postsContainer.textContent = 'Error loading posts.';
-      console.error(error);
-    }
+async function loadPosts() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/posts`);
+    if (!res.ok) throw new Error('Failed to fetch posts');
+    const posts = await res.json();
+
+    postsContainer.innerHTML = '';
+    posts.forEach(post => {
+      const formattedDate = formatUKDate(post.created_at);
+      const el = document.createElement('div');
+      el.className = 'post';
+
+      // Initialize like count if not already present
+      if (!likeCounts[post.id]) {
+        likeCounts[post.id] = 0;
+      }
+
+      el.innerHTML = `
+        <div class="post-header">
+          <small>${formattedDate}</small>
+          <h3>${post.title}</h3>
+        </div>
+        <p>${post.content}</p>
+        <div class="post-footer">
+          <button class="like-btn" data-id="${post.id}">👍 Like</button>
+          <span class="like-count" id="like-${post.id}">${likeCounts[post.id]} likes</span>
+        </div>
+      `;
+
+      postsContainer.appendChild(el);
+    });
+
+    attachLikeHandlers();
+  } catch (error) {
+    postsContainer.textContent = 'Error loading posts.';
+    console.error(error);
   }
+}
+
+
+
+//Like Handler 
+function attachLikeHandlers() {
+  const buttons = document.querySelectorAll('.like-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', async () => {
+      const postId = button.getAttribute('data-id');
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/posts/${postId}/like`, {
+          method: 'POST'
+        });
+
+        if (!res.ok) throw new Error('Failed to like post');
+        const data = await res.json();
+        const countEl = document.getElementById(`like-${postId}`);
+        countEl.textContent = `${data.likes} likes`;
+      } catch (err) {
+        console.error('Error liking post:', err);
+      }
+    });
+  });
+}
 
 loadPosts();
 
