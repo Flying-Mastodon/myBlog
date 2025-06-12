@@ -143,13 +143,12 @@ async function getIP() {
   try {
     const response = await fetch('http://ip-api.com/json/');
     const data = await response.json();
-    console.log('Public IP Address:', data.query);
     get_ip_address = data.query;
     get_country = data.country;
     get_isp = data.isp;
     return data.ip;
   } catch (error) {
-    console.error('Error fetching IP:', error);
+    console.error('Error fetching country & ISP:', error);
     getIPbasic();
     return null;
   }
@@ -161,11 +160,10 @@ async function getIPbasic() {
   try {
     const response = await fetch('https://api.ipify.org?format=json');
     const data = await response.json();
-    console.log('Public IP Address:', data.ip);
     get_ip_address = data.ip;
     return data.ip;
   } catch (error) {
-    console.error('Error fetching IP:', error);
+    console.error('Error fetching IP, primary and fallback has failed:', error);
     return null;
   }
 }
