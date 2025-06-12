@@ -18,13 +18,13 @@ fetch('header.html')
     const link = document.createElement('a');
     link.classList.add('nav-item');
 
-    const response = await fetch('https://myblog-sy0j.onrender.com/api/user', { credentials: 'include' });
+    const response = await fetch('https://myblog-sy0j.onrender.com/api/me', { credentials: 'include' });
 
     if (response.ok) {
-      link.href = '/profile.html';
+      link.href = 'profile.html';
       link.textContent = 'Profile';
     } else {
-      link.href = '/login.html';
+      link.href = 'login.html';
       link.textContent = 'Login';
     }
 

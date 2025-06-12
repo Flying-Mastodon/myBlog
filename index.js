@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const authenticateUser = require('./middleware/auth');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
@@ -67,7 +66,7 @@ app.get('/api/me', authMiddleware, (req, res) => {
   res.json({ user: req.user });
 });
 
-app.get('/api/user', authenticateUser, (req, res) => {
+app.get('/api/user', authMiddleware, (req, res) => {
   res.json(req.user); // This is set by middleware if token is valid
 });
 //-------END USER AUTH-----------
