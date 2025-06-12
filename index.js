@@ -1,19 +1,72 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('public'));
 
 
 // Read from environment variables (set in Render Dashboard)
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+
+
+// --------UserAuth - High Risk----------
+// Create user
+app.post('/api/signup', async (req, res) => {
+  const { email, password } = req.body;
+  const { data, error } = await supabase.auth.admin.createUser({
+    email,
+    password,
+    email_confirm: true,
+  });
+
+  if (error) return res.status(400).json({ error: error.message });
+  res.json({ message: 'User created successfully' });
+});
+
+// Login and issue JWT
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+  if (error) return res.status(401).json({ error: 'Invalid credentials' });
+
+  // Create custom backend JWT
+  const token = jwt.sign({ user: data.user }, process.env.SUPABASE_JWT_SECRET, { expiresIn: '1h' });
+
+  // Set token in cookie
+  res.cookie('token', token, { httpOnly: true, sameSite: 'Lax' });
+  res.json({ message: 'Logged in' });
+});
+
+// Middleware to protect routes
+function authMiddleware(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ error: 'Not authenticated' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.SUPABASE_JWT_SECRET);
+    req.user = decoded.user;
+    next();
+  } catch {
+    return res.status(403).json({ error: 'Invalid token' });
+  }
+}
+
+// Example protected route
+app.get('/api/me', authMiddleware, (req, res) => {
+  res.json({ user: req.user });
+});
+//-------END USER AUTH-----------
 
 // Endpoint to fetch blog posts
 app.get('/api/posts', async (req, res) => {
