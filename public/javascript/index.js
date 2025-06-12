@@ -105,6 +105,22 @@ async function getIP() {
     return data.ip;
   } catch (error) {
     console.error('Error fetching IP:', error);
+    getIPbasic();
+    return null;
+  }
+}
+
+
+//fallback if the better ip-api does not work (typically due to HTTPS)
+async function getIPbasic() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    console.log('Public IP Address:', data.ip);
+    get_ip_address = data.ip;
+    return data.ip;
+  } catch (error) {
+    console.error('Error fetching IP:', error);
     return null;
   }
 }
