@@ -50,10 +50,10 @@ app.get('/api/analytics', async (req, res) => {
 
 // Endpoint to post analytics 
 app.post('/api/analytics', async (req, res) => {
-  const { ip_address, os } = req.body;
+  const { ip_address, os, country, isp } = req.body;
   const { error } = await supabase
     .from('analytics')
-    .insert([{ ip_address, os }]);
+    .insert([{ ip_address, os, country, isp }]);
 
   if (error) return res.status(500).json({ error: error.message });
   res.status(201).json({ message: 'Record created!' });
