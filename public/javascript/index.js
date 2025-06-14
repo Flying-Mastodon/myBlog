@@ -96,7 +96,8 @@ async function postAnalytics() {
   const ip_address = get_ip_address;
   const country = get_country;
   const isp = get_isp;
-  console.log('Debug Public IP Address:', get_ip_address);
+  //console.log('Debug Public IP Address:', get_ip_address);
+  //console.log('Debug Public ISP Address:', get_isp);
     try {
            const res = await fetch(`${API_BASE_URL}/api/analytics`, {
         method: 'POST',
@@ -141,11 +142,11 @@ function getOS() {
 
 async function getIP() {
   try {
-    const response = await fetch('http://ip-api.com/json/');
+    const response = await fetch('https://ipwho.is/');
     const data = await response.json();
-    get_ip_address = data.query;
+    get_ip_address = data.ip;
     get_country = data.country;
-    get_isp = data.isp;
+    get_isp = data.connection.isp;
     return data.ip;
   } catch (error) {
     console.error('Error fetching country & ISP:', error);
