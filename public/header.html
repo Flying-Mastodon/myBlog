@@ -18,11 +18,11 @@
 </header>
 
 <style>
-/* Basic dropdown styles */
+/* Modern Dropdown Menu Styles */
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
   margin: 0;
   padding: 0;
@@ -34,39 +34,145 @@
 
 .nav-links a {
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   display: block;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* Dropdown indicator */
+.dropdown > a::after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.4rem;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid rgba(255, 255, 255, 0.8);
+  transition: var(--transition);
+}
+
+.dropdown:hover > a::after {
+  border-top-color: white;
+  transform: translateY(2px);
 }
 
 /* Dropdown menu */
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.5rem);
   left: 0;
-  background: rgb(46, 172, 255);
+  background: var(--dark-color);
   list-style: none;
   margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-width: 180px;
+  padding: 0.5rem 0;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
   z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 1rem;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent var(--dark-color) transparent;
 }
 
 .dropdown-menu li a {
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
+  padding: 0.75rem 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: var(--transition);
 }
 
+.dropdown-menu li a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding-left: 1.75rem;
+}
+
+.dropdown-menu li:first-child a {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.dropdown-menu li:last-child a {
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+/* Show dropdown */
 .dropdown:hover .dropdown-menu {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Optional: Visual cue for dropdown arrow */
-.dropdown > a::after {
+/* Dropdown icons */
+.dropdown-menu li a::before {
   content: '';
-  margin-left: 0.4rem;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--accent-color);
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+/* Example icons - you can replace these with actual icon classes or SVGs */
+.dropdown-menu li:nth-child(1) a::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z' /%3E%3Cpath d='M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z' /%3E%3C/svg%3E");
+}
+
+.dropdown-menu li:nth-child(2) a::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    opacity: 1;
+    display: none;
+    transform: none;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .dropdown-menu::before {
+    display: none;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 </style>

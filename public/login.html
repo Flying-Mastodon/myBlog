@@ -5,75 +5,198 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Script Directory</title>
   <link rel="stylesheet" href="style.css" />
-</head>
- <style>
-
+  <style>
+    /* Modern Auth Styles with Toggle Functionality */
     .auth-container {
-      background: #b2ccf7;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 1px #000;
-      max-width: 400px;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      max-width: 420px;
       width: 100%;
+      margin: 2rem auto;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
-    h2 {
-      margin-bottom: 1rem;
+
+    .auth-container:hover {
+      box-shadow: 0 10px 30px rgba(67, 97, 238, 0.15);
+    }
+
+    .auth-container h2 {
+      margin-bottom: 1.5rem;
       text-align: center;
+      color: var(--dark-color);
+      font-size: 1.75rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+      transition: var(--transition);
     }
-    form {
+
+    .auth-container h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+
+    /* Form Styles with Toggle */
+    .auth-form {
       display: none;
       flex-direction: column;
+      gap: 1.25rem;
+      position: relative;
+      transition: var(--transition);
     }
-    form.active {
+
+    .auth-form.active {
       display: flex;
+      animation: fadeInSlideUp 0.4s ease-out forwards;
     }
-    input {
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 8px;
+
+    @keyframes fadeInSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    button {
-      padding: 0.75rem;
-      background: #3b82f6;
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--border-radius);
+      font-family: var(--body-font);
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: #f8fafc;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+
+    /* Button Styles */
+    .auth-btn {
+      padding: 0.875rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      margin-top: 0.5rem;
+      box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
     }
-    .switch {
+
+    .auth-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(67, 97, 238, 0.25);
+    }
+
+    /* Switch Form Link */
+    .form-switch {
       text-align: center;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      color: var(--text-light);
+      font-size: 0.9375rem;
     }
-    .switch button {
+
+    .switch-btn {
       background: none;
-      color: #0415ff;
+      color: var(--primary-color);
       border: none;
       cursor: pointer;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: var(--transition);
+      margin-left: 0.25rem;
+    }
+
+    .switch-btn:hover {
+      background: rgba(67, 97, 238, 0.1);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 480px) {
+      .auth-container {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+      }
+    }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      .auth-container {
+        background: var(--card-bg);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .form-control {
+        background-color: #1e293b;
+        border-color: #334155;
+        color: white;
+      }
     }
   </style>
+</head>
 <body>
   <div id="header-placeholder"></div>
-<body>
+  
   <div class="auth-container">
     <h2 id="form-title">Login</h2>
 
-    <form id="login-form" class="active">
-      <input type="email" id="login-email" placeholder="Email" required />
-      <input type="password" id="login-password" placeholder="Password" required />
-      <button type="submit">Login</button>
+    <form id="login-form" class="auth-form active">
+      <div class="form-group">
+        <input type="email" id="login-email" class="form-control" placeholder="Email" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="login-password" class="form-control" placeholder="Password" required />
+      </div>
+      <button type="submit" class="auth-btn">Login</button>
     </form>
 
-    <form id="signup-form">
-      <input type="email" id="signup-email" placeholder="Email" required />
-      <input type="password" id="signup-password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
+    <form id="signup-form" class="auth-form">
+      <div class="form-group">
+        <input type="email" id="signup-email" class="form-control" placeholder="Email" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="signup-password" class="form-control" placeholder="Password" required />
+      </div>
+      <button type="submit" class="auth-btn">Sign Up</button>
     </form>
 
-    <div class="switch">
+    <div class="form-switch">
       <span id="toggle-text">Don't have an account?</span>
-      <button id="toggle-button">Sign Up</button>
+      <button id="toggle-button" class="switch-btn">Sign Up</button>
     </div>
   </div>
 
@@ -84,14 +207,26 @@
     const formTitle = document.getElementById('form-title');
     const toggleText = document.getElementById('toggle-text');
 
+    // Enhanced toggle function with animations
     toggleBtn.addEventListener('click', () => {
       const isLogin = loginForm.classList.contains('active');
-
-      loginForm.classList.toggle('active');
-      signupForm.classList.toggle('active');
-      formTitle.textContent = isLogin ? 'Sign Up' : 'Login';
-      toggleBtn.textContent = isLogin ? 'Login' : 'Sign Up';
-      toggleText.textContent = isLogin ? 'Already have an account?' : "Don't have an account?";
+      
+      // Add transition class
+      document.querySelector('.auth-form.active').classList.add('fading-out');
+      
+      setTimeout(() => {
+        loginForm.classList.toggle('active');
+        signupForm.classList.toggle('active');
+        formTitle.textContent = isLogin ? 'Sign Up' : 'Login';
+        toggleBtn.textContent = isLogin ? 'Login' : 'Sign Up';
+        toggleText.textContent = isLogin ? 'Already have an account?' : "Don't have an account?";
+        
+        // Update the underline animation
+        document.querySelector('.auth-container h2::after').style.background = 
+          isLogin 
+            ? 'linear-gradient(90deg, var(--secondary-color), var(--accent-color))' 
+            : 'linear-gradient(90deg, var(--primary-color), var(--accent-color))';
+      }, 300);
     });
 
     loginForm.addEventListener('submit', async (e) => {
@@ -99,18 +234,22 @@
       const email = document.getElementById('login-email').value;
       const password = document.getElementById('login-password').value;
 
-      const res = await fetch('https://myblog-sy0j.onrender.com/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      try {
+        const res = await fetch('https://myblog-sy0j.onrender.com/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
 
-      const data = await res.json();
-      if (res.ok) {
-        alert('Login successful');
-        window.location.href = 'index.html'; // Redirect to homepage or dashboard
-      } else {
-        alert('Login failed: ' + data.error);
+        const data = await res.json();
+        if (res.ok) {
+          alert('Login successful');
+          window.location.href = 'index.html';
+        } else {
+          throw new Error(data.error || 'Login failed');
+        }
+      } catch (error) {
+        alert(error.message);
       }
     });
 
@@ -119,21 +258,25 @@
       const email = document.getElementById('signup-email').value;
       const password = document.getElementById('signup-password').value;
 
-      const res = await fetch('https://myblog-sy0j.onrender.com/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      try {
+        const res = await fetch('https://myblog-sy0j.onrender.com/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
 
-      const data = await res.json();
-      if (res.ok) {
-        alert('Account created! Please log in.');
-        toggleBtn.click(); // Switch to login form
-      } else {
-        alert('Signup failed: ' + data.error);
+        const data = await res.json();
+        if (res.ok) {
+          alert('Account created! Please log in.');
+          toggleBtn.click();
+        } else {
+          throw new Error(data.error || 'Signup failed');
+        }
+      } catch (error) {
+        alert(error.message);
       }
     });
   </script>
-   <script src="javascript/header-loader.js"></script>
+  <script src="javascript/header-loader.js"></script>
 </body>
 </html>
